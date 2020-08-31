@@ -1,28 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 
 @Component({
-  selector: 'app-navBar',
-  templateUrl: './navBar.component.html',
-  styleUrls: ['./navBar.component.scss']
+  selector: 'app-navbar',
+  templateUrl: './navBar.component.html'
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent   {
 
   model: any = {};
 
   constructor(private authService: AuthService) { }
 
-  ngOnInit() {
-  }
 
   login(): void
   {
     this.authService.loginAction(this.model).subscribe(
-      next =>{
+      next => {
         console.log('Logged in Successfully');
       },
       error => {
-        console.log('Faild to loggin');
+        console.log(error);
       }
     );
   }
