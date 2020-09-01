@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navBar.component.html',
-  styles: [ '.dropdown-toggle, .dropdown-item{cursor:pointer; text-decoration: none;}' ]
+  styleUrls: ['./navBar.component.css']
 })
 export class NavBarComponent   {
 
