@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +12,9 @@ export class NavBarComponent   {
 
   model: any = {};
 
-  constructor(public authService: AuthService, private notificationService: AlertifyService) { }
+  constructor(public authService: AuthService,
+              private notificationService: AlertifyService,
+              private router: Router) { }
 
 
   login(): void
@@ -22,6 +25,9 @@ export class NavBarComponent   {
       },
       error => {
         this.notificationService.errorDialog(error);
+      },
+      () => {
+        this.router.navigate(['members']);
       }
     );
   }
@@ -33,5 +39,6 @@ export class NavBarComponent   {
   loggOut(): void{
     localStorage.removeItem('token');
     this.notificationService.messageDialog('Logged out');
+    this.router.navigate(['home']);
   }
 }
