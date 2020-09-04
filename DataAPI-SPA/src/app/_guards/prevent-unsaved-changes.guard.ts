@@ -1,0 +1,20 @@
+import { Injectable } from '@angular/core';
+import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
+import { MemberEditComponent } from '../members/member-edit/member-edit.component';
+import { AlertifyService } from '../_services/alertify.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+// Guard encargado de enviarle una notificacion al usuario cuando va a cambiar de ruta y tiene datos sin guardar
+export class PreventUnsavedChangesGuard implements CanDeactivate<MemberEditComponent> {
+
+
+  canDeactivate(component: MemberEditComponent) {
+    if ( component.editForm.dirty ){
+      return confirm('Are you sure you want to continue? Any unsaved changes will be lost!');
+    }
+    return true;
+  }
+}

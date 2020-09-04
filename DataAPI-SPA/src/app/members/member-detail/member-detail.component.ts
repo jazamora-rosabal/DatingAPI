@@ -4,6 +4,7 @@ import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import {NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation} from '@kolkov/ngx-gallery';
+import { AuthService } from 'src/app/_services/auth.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class MemberDetailComponent implements OnInit {
   galleryImages: NgxGalleryImage[];
 
   constructor(private userService: UserService, private notification: AlertifyService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute, private authService: AuthService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -50,6 +51,10 @@ export class MemberDetailComponent implements OnInit {
       });
     }
     return imagesUrl;
+  }
+
+  isLoggedInUser(): boolean{
+    return this.user.id == this.authService.decodedToken.nameid;
   }
 
  /*  loadUserData(){

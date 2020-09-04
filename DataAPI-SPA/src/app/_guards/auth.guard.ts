@@ -7,6 +7,7 @@ import { from } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+// Guard encargado de comprobar si el usuerio esta autenticado para darle acceso a las rutas
 export class AuthGuard implements CanActivate {
 
   constructor(private authService: AuthService,

@@ -22,12 +22,15 @@ import { ListsComponent } from './lists/lists.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { routes } from './route.routing';
 import { AuthGuard } from './_guards/auth.guard';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 
-export function tokenGetter(): string{
+export function tokenGetter(): string {
   return localStorage.getItem('token');
 }
 
@@ -41,7 +44,8 @@ export function tokenGetter(): string{
     ListsComponent,
     MemberListComponent,
     MemberCardComponent,
-    MemberDetailComponent
+    MemberDetailComponent,
+    MemberEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,11 +61,20 @@ export function tokenGetter(): string{
         tokenGetter,
         allowedDomains: ['localhost:5000'],
         disallowedRoutes: ['localhost:5000/api/auth'],
-        skipWhenExpired: true
-      }
-    })
+        skipWhenExpired: true,
+      },
+    }),
   ],
-  providers: [AuthService, ErrorInterceptorProvider, AlertifyService, AuthGuard, MemberDetailResolver, MemberListResolver],
+  providers: [
+    AuthService,
+    ErrorInterceptorProvider,
+    AlertifyService,
+    AuthGuard,
+    PreventUnsavedChangesGuard,
+    MemberDetailResolver,
+    MemberListResolver,
+    MemberEditResolver,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { User } from '../_models/user';
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root',
@@ -19,5 +20,9 @@ export class UserService {
 
   getUser(id: number): Observable<User> {
     return this.http.get<User>(this.baseUrl + id);
+  }
+
+  updateUser(id: number, user: User): Observable<void> {
+    return this.http.put<void>(this.baseUrl + id, user);
   }
 }
