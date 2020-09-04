@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IValue } from '../IValue';
+import { IValue } from '../_models/value';
 
 @Component({
   selector: 'app-home',
