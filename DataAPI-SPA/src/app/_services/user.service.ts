@@ -25,4 +25,12 @@ export class UserService {
   updateUser(id: number, user: User): Observable<void> {
     return this.http.put<void>(this.baseUrl + id, user);
   }
+
+  setMainPhoto(userId: number, photoId: number): Observable<void> {
+    return this.http.post<void>(this.baseUrl + userId + '/photos/' + photoId + '/setMain', { });
+  }
+  // http://localhost:5000/api/users/{userId}/photos/{idPhoto}
+  deleteFPhoto(userId: number, photoId: number): Observable<void> {
+    return this.http.delete<void>(this.baseUrl + userId + '/photos/' + photoId);
+  }
 }

@@ -64,10 +64,24 @@
     color: #404040;
 }
 
+.tab-pane active {
+    padding-bottom: 50px;
+}
+
 .member-tabset>.tab-content {
-    margin-top: -3px;
+    margin: -3px 5px 10px;
     background-color: #fff;
     border: 0;
     border-top: 1px solid #eee;
     padding: 20px 5px;
+}
+
+.btn-secondary {
+    background-color: #ececec !important;
+    border-color: #e6e5e5 !important;
+}
+
+.btn-secondary:hover {
+    background-color: #b0b6bb !important;
+    border-color: #9fa4a9 !important;
 }

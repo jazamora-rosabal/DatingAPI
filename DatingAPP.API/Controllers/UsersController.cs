@@ -6,6 +6,7 @@ using DatingAPP.API.Data;
 using DatingAPP.API.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using DatingAPP.API.Helpers;
 
 namespace DatingAPP.API.Controllers
 {
@@ -43,7 +44,7 @@ namespace DatingAPP.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userUpdateDto)
         {
-            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            if (!id.IsLoggenInUser(User))
                 return Unauthorized();
             var userModel = await _repository.GetUser(id);
             _mapper.Map(userUpdateDto, userModel);

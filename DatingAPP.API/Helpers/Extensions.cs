@@ -1,4 +1,6 @@
 using System;
+using System.Security.Claims;
+using DatingAPP.API.Models;
 using Microsoft.AspNetCore.Http;
 
 namespace DatingAPP.API.Helpers
@@ -18,6 +20,11 @@ namespace DatingAPP.API.Helpers
             if (thisDateTime.AddYears(age) > DateTime.Today)
                 age--;
             return age;
+        }
+
+        public static bool IsLoggenInUser( this int userId, ClaimsPrincipal user)
+        {            
+            return userId == int.Parse(user.FindFirst(ClaimTypes.NameIdentifier).Value);
         }
     }
 }

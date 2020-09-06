@@ -1,0 +1,36 @@
+.photo-block {
+    min-width: 130px !important;
+    margin: 10px 0;
+}
+
+img.img-thumbnail {
+    margin-bottom: -1px;
+    padding: 0 !important;
+    border-radius: 0 !important;
+}
+
+.row.photo-wrapper {
+    margin-bottom: 30px;
+}
+
+.select-file-title {
+    padding-top: 10px;
+}
+
+.select-file-title h3 {
+    margin: 0;
+}
+
+.file-action {
+    cursor: pointer;
+    font-size: 20px;
+    max-width: 30px;
+}
+
+input[type=file] {
+    display: none;
+}
+
+.nv-file-over {
+    border: dotted 3px #d9534f;
+}

@@ -7,3 +7,9 @@
 .navbar {
     padding: 1rem;
 }
+
+img.avatar {
+    max-height: 50px;
+    border-radius: 50px;
+    display: inline;
+}
