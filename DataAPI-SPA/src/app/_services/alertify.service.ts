@@ -1,11 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import * as alertify from 'alertifyjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AlertifyService {
-  constructor() {}
+  position: string;
+
+  constructor() {
+    this.changePositions('bottom-left');
+  }
+
+  changePositions(newPosition: string) {
+    this.position = newPosition;
+    alertify.set('notifier', 'position', this.position);
+  }
 
   successDialog(message: string) {
     alertify.success(message);
