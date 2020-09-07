@@ -15,6 +15,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 export class MemberDetailComponent implements OnInit {
 
   user: User;
+  live = false;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
 
@@ -24,8 +25,6 @@ export class MemberDetailComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.user =  data.user;
-      this.authService.changeMemberPhoto(this.user.photoUrl);
-      this.authService.updateMainPhotoCurrentUser(this.user.photoUrl);
     });
 
     this.galleryOptions = [

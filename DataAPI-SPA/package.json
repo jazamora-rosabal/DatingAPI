@@ -28,6 +28,7 @@
     "jquery": "^3.5.1",
     "ng2-file-upload": "^1.4.0",
     "ngx-bootstrap": "^6.1.0",
+    "ngx-timeago": "^1.0.4",
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",

@@ -10,6 +10,7 @@ using DatingAPP.API.Helpers;
 
 namespace DatingAPP.API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]

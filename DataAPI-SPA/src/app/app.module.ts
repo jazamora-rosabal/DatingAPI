@@ -11,6 +11,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
+import { TimeagoModule, TimeagoPipe } from 'ngx-timeago';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './navBar/navBar.component';
@@ -52,7 +53,7 @@ export function tokenGetter(): string {
     MemberDetailComponent,
     MemberEditComponent,
     PhotoEditorComponent,
-    PhotoPipePipe,
+    PhotoPipePipe
   ],
   imports: [
     BrowserModule,
@@ -64,6 +65,7 @@ export function tokenGetter(): string {
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
+    TimeagoModule.forRoot(),
     BsDatepickerModule.forRoot(),
     RouterModule.forRoot(routes),
     JwtModule.forRoot({
