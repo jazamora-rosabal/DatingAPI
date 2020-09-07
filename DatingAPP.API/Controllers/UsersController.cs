@@ -31,7 +31,7 @@ namespace DatingAPP.API.Controllers
             return Ok(usersToRetun);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name="GetUser")]
         public async Task<IActionResult> GetUserById(int id)
         {
             var userModel = await _repository.GetUser(id);

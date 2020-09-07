@@ -1,27 +1,133 @@
-<form #registerForm="ngForm" (ngSubmit)="register()">
+<form [formGroup]="registerForm" (ngSubmit)="register()">
     <h2 class="text-center text-primary">Sign Up</h2>
-    <hr>
+    <hr />
 
+    <!--
+        === RADIO BUTTONS ==
+    -->
     <div class="form-group">
-        <input type="text" class="form-control" required name="username" [(ngModel)]="model.username" placeholder="Username">
+        <label class="control-label">I am a: </label>
+        <div class="custom-control custom-radio radio-inline ml-3">
+            <input type="radio" formControlName="gender" id="customRadio1" value="female" class="custom-control-input" />
+            <label class="custom-control-label" for="customRadio1">Female</label>
+        </div>
+        <div class="custom-control custom-radio radio-inline ml-3">
+            <input type="radio" formControlName="gender" id="customRadio2" value="male" class="custom-control-input" />
+            <label class="custom-control-label" for="customRadio2">Male</label>
+        </div>
     </div>
 
-
+    <!--
+        === USERNAME ==
+    -->
     <div class="form-group">
-        <input type="password" class="form-control" required name="password" [(ngModel)]="model.password" placeholder="Password">
+        <input type="text" [ngClass]="isFieldTouched('username') ? addClassToUserNameValid() : ''" class="form-control" formControlName="username" placeholder="Username" />
+        <div class="invalid-feedback" *ngIf="checkFieldRequird('username')">
+            Please choose an username
+        </div>
     </div>
 
-    <!--  <div class="form-group">
-        <label for="favouriteValues">What is your favourite Value?</label>
-        <select name="favouriteValues" class="form-control" [(ngModel)]="model.valueID">
-            <option *ngFor="let value of valuesFromHome" [value]="value.id">{{value.name}}</option>
+    <!--
+        === KNOWNAS ==
+    -->
+    <div class="form-group">
+        <input type="text" [ngClass]="isFieldTouched('knownAs') ? addClassToKnownAsValid() : ''" class="form-control" formControlName="knownAs" placeholder="Known as" />
+        <div class="invalid-feedback" *ngIf="checkFieldRequird('knownAs')">
+            Known as is required
+        </div>
+    </div>
+
+    <!--
+        === DATE OF BIRTH ==
+    -->
+    <div class="form-group">
+        <input type="text" [ngClass]="
+        isFieldTouched('dateOfBirth') ? addClassToDateOfBirthValid() : ''
+      " class="form-control" formControlName="dateOfBirth" placeholder="Date of Birth " bsDatepicker [bsConfig]="bsConfid" />
+        <div class="invalid-feedback" *ngIf="checkFieldRequird('dateOfBirth')">
+            Date of Birth is required
+        </div>
+        <div class="invalid-feedback" *ngIf="
+        isFieldTouched('dateOfBirth') && registerForm.hasError('isAKid')
+      ">
+            You don't have a 18 years old...
+        </div>
+    </div>
+
+    <!--
+        === CITY ==
+    -->
+    <div class="form-group">
+        <input type="text" [ngClass]="isFieldTouched('city') ? addClassToCityValid() : ''" class="form-control" formControlName="city" placeholder="City" />
+        <div class="invalid-feedback" *ngIf="checkFieldRequird('city')">
+            City is required
+        </div>
+    </div>
+
+    <!--
+        === COUNTRY ==
+    -->
+    <div class="form-group">
+        <input type="text" [ngClass]="isFieldTouched('country') ? addClassToCountryValid() : ''" class="form-control" formControlName="country" placeholder="Country" />
+        <div class="invalid-feedback" *ngIf="checkFieldRequird('country')">
+            Country is required
+        </div>
+    </div>
+
+    <!--
+        === PASSWORD ==
+    -->
+    <div class="form-group">
+        <input type="password" [ngClass]="
+        registerForm.get('password').touched ? addClassToPasswordValid() : ''
+      " class="form-control" formControlName="password" placeholder="Password" />
+        <div class="invalid-feedback" *ngIf="checkFieldRequird('password')">
+            Password is required
+        </div>
+        <div class="invalid-feedback" *ngIf="
+        isFieldTouched('password') &&
+        registerForm.get('password').hasError('minlength')
+      ">
+            Password must be al least 4 characters
+        </div>
+        <div class="invalid-feedback" *ngIf="
+        isFieldTouched('password') &&
+        registerForm.get('password').hasError('maxlength')
+      ">
+            Password cannot exceed 8 characters
+        </div>
+    </div>
+    <!--
+        === CONFIRM PASSWORD ==
+    -->
+    <div class="form-group">
+        <input type="password" [ngClass]="
+        isFieldTouched('confirmPassword')
+          ? addClassToConfirmPasswordValid()
+          : ''
+      " class="form-control" formControlName="confirmPassword" placeholder="Confirm Password" />
+        <div class="invalid-feedback" *ngIf="checkFieldRequird('confirmPassword')">
+            Password is required
+        </div>
+        <div class="invalid-feedback" *ngIf="
+        isFieldTouched('confirmPassword') && registerForm.hasError('mismatch')
+      ">
+            Password must Match
+        </div>
+    </div>
+
+    <!--  <div class="form-group ">
+        <label for="favouriteValues ">What is your favourite Value?</label>
+        <select name="favouriteValues " class="form-control " [(ngModel)]="model.valueID ">
+            <option *ngFor="let value of valuesFromHome " [value]="value.id ">{{value.name}}</option>
         </select>
-
+        
     </div> -->
 
     <div class="form-group text-center">
-        <button class="btn btn-success mr-2" type="submit">Register</button>
-        <button class="btn btn-danger " type="button" (click)="cancel()">Cancel</button>
+        <button [disabled]="!registerForm.valid" class="btn btn-success mr-2" type="submit ">Register</button>
+        <button class="btn btn-danger" type="button " (click)="cancel()">
+      Cancel
+    </button>
     </div>
-
 </form>

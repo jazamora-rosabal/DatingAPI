@@ -27,7 +27,6 @@ export class PhotoEditorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.photos);
     this.initializeUploader();
   }
 
@@ -67,6 +66,10 @@ export class PhotoEditorComponent implements OnInit {
           isMain: objResponse.isMain,
         };
         this.photos.push(photo);
+        if (photo.isMain) {
+          this.authService.changeMemberPhoto(photo.url);
+          this.authService.updateMainPhotoCurrentUser(photo.url);
+        }
       }
     };
 
@@ -82,7 +85,6 @@ export class PhotoEditorComponent implements OnInit {
       .setMainPhoto(this.authService.decodedToken.nameid, photo.id)
       .subscribe(
         () => {
-          console.log('Successfully set to main');
           this.currentMainPhoto = this.photos.filter((p) => p.isMain)[0];
           this.currentMainPhoto.isMain = false;
           photo.isMain = true;
@@ -103,7 +105,10 @@ export class PhotoEditorComponent implements OnInit {
           .deleteFPhoto(this.authService.decodedToken.nameid, photo.id)
           .subscribe(
             () => {
-              this.photos.splice(this.photos.findIndex(photoObj => photoObj.id === photo.id), 1);
+              this.photos.splice(
+                this.photos.findIndex((photoObj) => photoObj.id === photo.id),
+                1
+              );
               this.notification.successDialog('Photo has been deleted.');
             },
             (error) => {

@@ -43,14 +43,14 @@ export class AuthService {
     );
   }
 
-  registerAction(model: any) {
-    return this.http.post(this.baseUrl + 'register', model);
+  registerAction(user: User) {
+    return this.http.post(this.baseUrl + 'register', user);
   }
 
 
   loggedIn(): boolean{
     const TOKEN = localStorage.getItem('token');
-    return !this.jwtHelper.isTokenExpired(TOKEN);
+    return TOKEN && !this.jwtHelper.isTokenExpired(TOKEN) ? true : false;
   }
 
   updateMainPhotoCurrentUser(photoUrl: string){

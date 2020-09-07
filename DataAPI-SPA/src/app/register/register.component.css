@@ -1,0 +1,9 @@
+.radio-inline {
+    display: inline;
+    cursor: pointer;
+}
+
+.radio-inline>input[type="radio"],
+.radio-inline>label {
+    cursor: pointer !important;
+}
