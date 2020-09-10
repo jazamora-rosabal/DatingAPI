@@ -12,6 +12,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TimeagoModule, TimeagoPipe } from 'ngx-timeago';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './navBar/navBar.component';
@@ -34,6 +35,7 @@ import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { PhotoPipePipe } from './_pipes/photo-pipe.pipe';
+import { MembersFilterComponent } from './members/members-filter/members-filter.component';
 
 
 export function tokenGetter(): string {
@@ -53,7 +55,8 @@ export function tokenGetter(): string {
     MemberDetailComponent,
     MemberEditComponent,
     PhotoEditorComponent,
-    PhotoPipePipe
+    PhotoPipePipe,
+    MembersFilterComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +68,7 @@ export function tokenGetter(): string {
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
+    PaginationModule.forRoot(),
     TimeagoModule.forRoot(),
     BsDatepickerModule.forRoot(),
     RouterModule.forRoot(routes),

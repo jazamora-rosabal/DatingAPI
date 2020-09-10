@@ -1,0 +1,84 @@
+<form [formGroup]="filterForm" (ngSubmit)="filterUpdate()">
+    <div class="row">
+        <div class="col-4">
+            <h2 class="m-0">Filters</h2>
+        </div>
+        <div class="col-8 text-right">
+            <button [disabled]="!isReadyToFileter()" class="btn btn-sm btn-primary mr-2" type="submit">
+                <i class="fa fa-filter"></i> Filtrar</button>
+            <button [disabled]="!readyToReset" class="btn btn-sm btn-danger btn-reset-custom" type="button" (click)="resetFilter()"><i class="fa fa-undo"></i> Reset</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <hr>
+            <h4 class="m-2">Age</h4>
+            <ul class="list-group">
+                <ng-container *ngFor="let ageCategory of ageCategories">
+                    <li *ngIf="ageCategory.name != 'Default'" class="list-group-item d-flex justify-content-between align-items-center">
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" formControlName="ageRange" id="radio{{ageCategory.name}}" value="{{ageCategory.range}}" class="custom-control-input" (click)="changeCustomRangeStatus()" />
+                                <label class="custom-control-label" for="radio{{ageCategory.name}}">{{ageCategory.name}}</label>
+                            </div>
+                        </div>
+                    </li>
+                </ng-container>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div class="form-group">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" formControlName="ageRange" id="radioCustom" value="custom" class="custom-control-input" (click)="customRange = true" />
+                            <label class="custom-control-label" for="radioCustom">Custom Range</label>
+                            <div [ngClass]="!customRange ? 'd-none': ''" class="form-inline mt-1">
+                                <input type="number" [ngClass]="
+                                    isFieldTouched('minAgeCustom')
+                                    ? addClassToMinMaxAgeCustomValid('minAgeCustom', 'noMinAgeRange')
+                                    : ''" formControlName="minAgeCustom" placeholder="Min" class="mr-1" (keyup)="setMinAgeValue()" /> to
+                                <input type="number" [ngClass]="
+                                isFieldTouched('maxAgeCustom')
+                                ? addClassToMinMaxAgeCustomValid('maxAgeCustom', 'noMaxAgeRange')
+                                : ''" formControlName="maxAgeCustom" placeholder="Max" class="ml-1" (keyup)="setMaxAgeValue()" />
+                                <div class=" invalid-feedback " *ngIf="isFieldTouched('minAgeCustom') && filterForm.get('minAgeCustom').hasError('min')">
+                                    La edad minima debe ser mayor que 18 años (MIN) .
+                                </div>
+                                <div class=" invalid-feedback " *ngIf="isFieldTouched('minAgeCustom') && filterForm.hasError('noMinAgeRange')">
+                                    La edad minima debe ser mayor que 18 años (ERROR).
+                                </div>
+                                <div class=" invalid-feedback " *ngIf="isFieldTouched('maxAgeCustom') && filterForm.hasError('noMaxAgeRange') ">
+                                    La edad maxima debe ser menos que 99 años.
+                                </div>
+                                <div class=" invalid-feedback " *ngIf="isFieldTouched('minAgeCustom') && isFieldTouched('maxAgeCustom') && filterForm.hasError('noAgeRange') ">
+                                    La Edad Minima debe ser menor que la Edad Maxima
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col">
+            <h4 class="m-2">Gender</h4>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div class="form-group">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" formControlName="gender" id="radioFemale" value="female" class="custom-control-input" />
+                            <label class="custom-control-label " for="radioFemale">Female</label>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div class="form-group">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" formControlName="gender" id="radioMale" value="male" class="custom-control-input" />
+                            <label class="custom-control-label" for="radioMale">Male</label>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</form>

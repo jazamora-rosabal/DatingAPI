@@ -12,13 +12,15 @@ import { catchError } from 'rxjs/operators';
  el subscribe de la llamada se realiza en el componente a traves de ActivatedRoute
 */
 export class MemberListResolver implements Resolve<User[]>{
+    pageNumber = 1;
+    pageSize = 3;
 
     constructor(private userServices: UserService,
                 private router: Router,
                 private notification: AlertifyService){}
 
     resolve(route: ActivatedRouteSnapshot): Observable<User[]>  {
-        return this.userServices.getUsers().pipe(
+        return this.userServices.getUsers(this.pageNumber, this.pageSize).pipe(
             catchError(error => {
                 this.notification.errorDialog('Problems retrieving Data');
                 this.router.navigate(['/home']);

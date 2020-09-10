@@ -1,0 +1,8 @@
+input[type="number"] {
+    max-width: 120px;
+}
+
+input[type="radio"],
+label.custom-control-label {
+    cursor: pointer;
+}
